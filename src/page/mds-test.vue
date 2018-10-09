@@ -12,6 +12,14 @@ import numeric from 'numeric';
 export default {
   name: 'test1',
   mounted() {
+    const cityData = [[0, 200],
+      [1, 2]];
+
+    const labels = [
+      'Preliminary',
+      'Chicago'
+    ];
+
     (function (mds) {
       // / given a matrix of distances between some points, returns the
       // / point coordinates that best approximate the distances using
@@ -108,24 +116,16 @@ export default {
     }(window.mds = window.mds || {}));
 
 
-    const cityData = [[0, 200],
-      [1, 2, 3]];
-
-    const labels = [
-      'Preliminary',
-      'Chicago'
-    ];
-
     console.log(mds.classic(cityData));
 
-    const cityPositions = numeric.transpose(mds.classic(cityData));
+    const cityPositions = numeric.transpose(window.mds.classic(cityData));
 
     console.log(cityPositions);
 
     const w = Math.min(720, document.documentElement.clientWidth - 20);
-    const h = w / 2;
+    // const h = w / 2;
 
-    mds.drawD3ScatterPlot(d3.select('#cities'),
+    window.mds.drawD3ScatterPlot(d3.select('#cities'),
       cityPositions[0],
       cityPositions[1],
       labels,
