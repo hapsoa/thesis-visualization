@@ -19,6 +19,7 @@
   "dependencies": {
     "cors": "^2.8.4",
     "d3": "^5.7.0",
+    "lodash": "^4.17.11",
     "numeric": "^1.2.6",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1",

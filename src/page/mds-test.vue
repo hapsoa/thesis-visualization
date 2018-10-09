@@ -8,16 +8,45 @@
 // import mds from '../lib/mds';
 import * as d3 from 'd3';
 import numeric from 'numeric';
+import mdsDist from './javascripts/mds-dist';
 
 export default {
   name: 'test1',
   mounted() {
-    const cityData = [[0, 200],
-      [1, 2]];
+    const multivariateData = [
+      {
+        reading: 501,
+        math: 515,
+        writing: 493,
+        percent_g: 46,
+        pupil_staf: 7.9,
+        dropout_rate: 4.4
+      },
+      {
+        reading: 557,
+        math: 552,
+        writing: 549,
+        percent_g: 7,
+        pupil_staf: 6.7,
+        dropout_rate: 2.3
+      },
+      {
+        reading: 520,
+        math: 516,
+        writing: 492,
+        percent_g: 46,
+        pupil_staf: 7.9,
+        dropout_rate: 7.3
+      }
+    ];
+
+    const cityData = mdsDist.dist(multivariateData);
+    console.log(cityData);
 
     const labels = [
-      'Preliminary',
-      'Chicago'
+      'United States',
+      'Alabama',
+      'Alaska'
     ];
 
     (function (mds) {
@@ -116,11 +145,11 @@ export default {
     }(window.mds = window.mds || {}));
 
 
-    console.log(mds.classic(cityData));
+    // console.log(window.mds.classic(cityData));
 
     const cityPositions = numeric.transpose(window.mds.classic(cityData));
 
-    console.log(cityPositions);
+    // console.log(cityPositions);
 
     const w = Math.min(720, document.documentElement.clientWidth - 20);
     // const h = w / 2;
