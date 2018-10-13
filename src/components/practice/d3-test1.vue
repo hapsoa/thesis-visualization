@@ -57,6 +57,8 @@ export default {
       .enter()
       .append('circle')
       .style('background-color', 'blue')
+      .attr('cx', (d, i) => 30 + 30 * i)
+      .attr('cy', (d, i) => 30 + 30 * i)
       .transition()
       .duration(750)
       .delay((d, i) => i * 10)
