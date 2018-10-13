@@ -94,7 +94,7 @@ export default {
       this.$store.commit('increment', { inc: -1 });
     },
     async mousemoved() {
-      console.log(this);
+      // console.log(this);
     }
   }
 };
