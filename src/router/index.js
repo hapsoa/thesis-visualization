@@ -6,6 +6,7 @@ import DoughnutChartTest from '../components/doughnut-chart';
 import BarChart from '../components/bar-chart';
 import MainPageTest from '../page/main-page-test';
 import D3Test1 from '../components/practice/d3-test1';
+import CircleTest from '../page/circle-test';
 
 Vue.use(Router);
 
@@ -41,6 +42,11 @@ export default new Router({
       path: '/d3-test',
       name: D3Test1.name,
       component: D3Test1
+    },
+    {
+      path: '/circle-test',
+      name: CircleTest.name,
+      component: CircleTest
     }
   ]
 });
