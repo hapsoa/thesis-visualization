@@ -43,7 +43,7 @@ export default {
 
     // 유크리드 거리 방식으로 계산한 다음에
     const cityData = mdsDist.dist(multivariateData);
-    console.log(cityData);
+    // console.log(cityData);
 
     // 각 노드의 이름들(citiData배열의 순서대로)
     const labels = [

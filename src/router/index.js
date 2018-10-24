@@ -7,6 +7,7 @@ import BarChart from '../components/bar-chart';
 import MainPageTest from '../page/main-page-test';
 import D3Test1 from '../components/practice/d3-test1';
 import CircleTest from '../page/circle-test';
+import CircleTest2 from '../page/circle-test2';
 import ForceDirectedGraph from '../page/force-directed-graph';
 
 Vue.use(Router);
@@ -48,6 +49,11 @@ export default new Router({
       path: '/circle-test',
       name: CircleTest.name,
       component: CircleTest
+    },
+    {
+      path: '/circle-test2',
+      name: CircleTest2.name,
+      component: CircleTest2
     },
     {
       path: '/force-directed-graph',

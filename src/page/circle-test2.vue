@@ -6,6 +6,15 @@
 export default {
   name: 'circle-test',
   mounted() {
+    function polarToNormalCoordinate(centerPosition, radius, theta) {
+      const position = {};
+
+      position.x = centerPosition.x + (radius * Math.cos(theta));
+      position.y = centerPosition.y + (radius * Math.sin(theta));
+
+      return position;
+    }
+
     const svg = this.$d3.select('#canvas')
       .append('svg');
 
@@ -26,8 +35,8 @@ export default {
       .attr('fill', 'rgba(255, 255, 255, 0)')
       .attr('stroke', 'black')
       .attr('stroke-width', 1)
-      .attr('cx', 250)
-      .attr('cy', 250);
+      .attr('cx', center.x)
+      .attr('cy', center.y);
 
     svg.selectAll('text.year')
       .data(yearArray)
@@ -43,7 +52,11 @@ export default {
       {
         name: 'hi thesis',
         year: 2000,
-        color: 'yellow',
+        color: 'yellow', // cluster
+        position: {
+          theta: 12,
+          radius: 4
+        },
         keywords: [
           'hi', 'hello'
         ]
@@ -79,50 +92,12 @@ export default {
       .enter()
       .append('circle')
       .attr('r', 8)
-      .attr('cx', (d, i) => 250 - (6 * (d.year - 1990)))
-      .attr('cy', 250)
+      .attr('cx', (d, i) => polarToNormalCoordinate(center, 30, (i / 2) * Math.PI).x)
+      .attr('cy', (d, i) => polarToNormalCoordinate(center, 30, (i / 2) * Math.PI).y)
       .attr('fill', d => d.color);
+  },
+  methods: {
 
-    const node2Data = [
-      {
-        name: 'bye thesis',
-        year: 2005,
-        color: 'red',
-        keywords: [
-          'bye', 'good night'
-        ]
-      },
-      {
-        name: 'bye thesis',
-        year: 2015,
-        color: 'red',
-        keywords: [
-          'bye', 'good night'
-        ]
-      },
-      {
-        name: 'bye thesis',
-        year: 2000,
-        color: 'red',
-        keywords: [
-          'bye', 'good night'
-        ]
-      }
-    ];
-
-    svg.selectAll('circle.node2')
-      .data(node2Data)
-      .enter()
-      .append('circle')
-      .attr('r', 8)
-      .attr('cx', 250)
-      .attr('cy', (d, i) => 250 - (6 * (d.year - 1990)))
-      .attr('fill', d => d.color)
-      .attr('v-on:click', 'console.log("oh")');
-
-
-    // svg.selectAll('line')
-    //   .data()
   }
 };
 </script>
