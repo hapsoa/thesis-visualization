@@ -65,6 +65,11 @@ similarity 는 sibling 끼리의 유사성을 체크한다?
 
 
 
+clusters = {
+    blue: 0,
+    green: Math.PI
+}
+
 
 
 
