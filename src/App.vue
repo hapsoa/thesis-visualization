@@ -20,6 +20,10 @@ export default {
 };
 </script>
 
-<style>
-
+<style lang="sass">
+*
+  box-sizing: border-box
+body
+  margin: 0
+  padding: 0
 </style>

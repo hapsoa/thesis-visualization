@@ -11,7 +11,8 @@ import * as d3 from 'd3';
 export default {
   name: 'circle-test',
   mounted() {
-    /**+
+    const that = this;
+    /**
      * 극좌표를 일반 좌표로 바꾸는 함수
      * @param centerPosition : object 중심좌표
      * @param radius : number r
@@ -29,33 +30,39 @@ export default {
     const svg = this.$d3.select('#canvas')
       .append('svg');
 
-    svg.attr('width', 600)
-      .attr('height', 600);
+    svg.attr('width', 800)
+      .attr('height', 800);
 
     const center = {
-      x: 250,
-      y: 250
+      x: 400,
+      y: 400
     };
 
     // 연도별 큰 원 그리기
-    const yearArray = [1995, 1996, 1997, 1998, 1999];
+    const yearArray = [1995, 1996, 1997, 1998, 1999,
+      2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008,
+      2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018];
+    const yearRadius = 15; // 한 연도 원당 반지름 차이
     svg.selectAll('circle.year')
       .data(yearArray)
       .enter()
       .append('circle')
-      .attr('r', (d, i) => (i + 1) * 30)
+      .attr('r', (d, i) => (i + 1) * yearRadius)
       .attr('fill', 'rgba(255, 255, 255, 0)')
-      .attr('stroke', 'black')
+      .attr('stroke', (d, i) => {
+        if (i % 5 === 0) return 'rgba(50, 50, 50, 0.8)';
+        return 'rgba(200, 200, 200, 0.8)';
+      })
       .attr('stroke-width', 1)
       .attr('cx', center.x)
       .attr('cy', center.y);
 
     svg.selectAll('text.year')
-      .data(yearArray)
+      .data(_.filter(yearArray, year => year % 5 === 0))
       .enter()
       .append('text')
-      .attr('x', 250 - 18)
-      .attr('y', (d, i) => 250 + ((i + 1) * 30) + 5)
+      .attr('x', center.x - 18)
+      .attr('y', (d, i) => center.y + (((i * 5) + 1) * yearRadius) + 5)
       .attr('fill', 'black')
       .text(d => d);
 
@@ -66,8 +73,9 @@ export default {
         year: 1995,
         color: 'green', // cluster
         reference: '',
-        parentSimilarity: 0,
-        siblingUnSimilarity: 0
+        parentSimilarity: 0, // 0 ~ 1
+        siblingUnSimilarity: 0, // -0.9 ~ 0.9  0일수록 동일하다.
+        authors: ['jack', 'john', 'jain']
       },
       // 자식들
       {
@@ -106,9 +114,57 @@ export default {
         name: 'yyy',
         year: 1997,
         color: 'blue',
-        reference: 'hhh',
+        reference: '',
         parentSimilarity: 0.5,
         siblingUnSimilarity: 0
+      },
+      {
+        name: 'yyy-1',
+        year: 1998,
+        color: 'blue',
+        reference: 'yyy',
+        parentSimilarity: 0.5,
+        siblingUnSimilarity: -0.2
+      },
+      {
+        name: 'yyy-2',
+        year: 2000,
+        color: 'blue',
+        reference: 'yyy-1',
+        parentSimilarity: 0.5,
+        siblingUnSimilarity: -0.6
+      },
+      {
+        name: 'yyy-3',
+        year: 2001,
+        color: 'blue',
+        reference: 'yyy-1',
+        parentSimilarity: 0.5,
+        siblingUnSimilarity: -0.5
+      },
+      {
+        name: 'yyy-4',
+        year: 2008,
+        color: 'blue',
+        reference: 'yyy-3',
+        parentSimilarity: 0.5,
+        siblingUnSimilarity: -0.6
+      },
+      {
+        name: 'yyy-5',
+        year: 1999,
+        color: 'blue',
+        reference: 'yyy',
+        parentSimilarity: 0.5,
+        siblingUnSimilarity: 0.3
+      },
+      {
+        name: 'yyy-6',
+        year: 2010,
+        color: 'blue',
+        reference: 'yyy-5',
+        parentSimilarity: 0.5,
+        siblingUnSimilarity: 0.3
       }
     ];
 
@@ -126,7 +182,7 @@ export default {
     // polar coordinate 와 normal coordinate 를 nodesData 에 넣는다.
     _.forEach(nodesData, (node) => {
       node.polarCoordinate = {};
-      node.polarCoordinate.radius = (node.year - 1994) * 30;
+      node.polarCoordinate.radius = (node.year - 1994) * yearRadius;
       node.polarCoordinate.theta =
         clusters[node.color] + (node.siblingUnSimilarity
         * ((Math.PI) / clustersKeys.length)); // 비유사성의 정도 -0.9 ~ 0.9 사이에 따라 각도 조절됨
@@ -175,7 +231,7 @@ export default {
       .data(nodesData)
       .enter()
       .append('circle')
-      .attr('r', 8)
+      .attr('r', 6)
       .attr('cx', (d, i) => d.normalCoordinate.x)
       .attr('cy', (d, i) => d.normalCoordinate.y)
       .attr('fill', d => d.color)
@@ -202,6 +258,7 @@ export default {
           .attr('fill', 'blue')
           .text(d.name)
           .classed('name', true);
+        that.$store.commit('showAuthors', d.authors);
       })
       .on('mouseout', function (d, i) {
         d3.select(this).style('fill', d.color);

@@ -9,6 +9,7 @@ import D3Test1 from '../components/practice/d3-test1';
 import CircleTest from '../page/circle-test';
 import CircleTest2 from '../page/circle-test2';
 import ForceDirectedGraph from '../page/force-directed-graph';
+import ThesisTest1 from '../page/thesis-test1';
 
 Vue.use(Router);
 
@@ -59,6 +60,11 @@ export default new Router({
       path: '/force-directed-graph',
       name: ForceDirectedGraph.name,
       component: ForceDirectedGraph
+    },
+    {
+      path: '/thesis-test1',
+      name: ThesisTest1.name,
+      component: ThesisTest1
     }
   ]
 });

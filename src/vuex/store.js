@@ -5,7 +5,7 @@ import Vue from 'vue';
 Vue.use(Vuex);
 const store = new Vuex.Store({
   state: {
-    count: 0
+    clickedAuthors: []
   },
   /** 반드시 동기여야 한다.
    * method 이름이 문자열 이므로 상수로 빼둘 필요가 있다.
@@ -14,6 +14,9 @@ const store = new Vuex.Store({
   mutations: {
     increment(state, data) {
       state.count += data.inc;
+    },
+    showAuthors(state, payload) {
+      if (payload !== null) state.clickedAuthors = payload;
     }
   },
 
@@ -27,7 +30,8 @@ const store = new Vuex.Store({
     }
   },
   getters: {
-    getCount: state => state.count
+    getCount: state => state.count,
+    getClickedAuthors: state => state.clickedAuthors
   }
 });
 
