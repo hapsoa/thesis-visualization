@@ -65,19 +65,14 @@ export default {
     },
     getNodePosition(nodeData) {
       const sumOfaij = _.reduce(nodeData, (sum, value) => sum + value);
-      const sumOfaijMulCos = _.reduce(nodeData, (sum, value, key) => {
-        // console.log('value: ', value);
-        // console.log('key: ', key);
-        return sum + (value
-          * Math.cos(this.getDimensionTheta(_.indexOf(this.dimensions, key))));
-      }, 0);
+      const sumOfaijMulCos = _.reduce(nodeData, (sum, value, key) => sum + (value
+          * Math.cos(this.getDimensionTheta(_.indexOf(this.dimensions, key)))), 0);
       const x = this.center.x + ((sumOfaijMulCos / sumOfaij) * this.radvizRadius);
 
       const sumOfaijMulSin = _.reduce(nodeData, (sum, value, key) => sum + (value
           * Math.sin(this.getDimensionTheta(_.indexOf(this.dimensions, key)))), 0);
       const y = this.center.y + ((sumOfaijMulSin / sumOfaij) * this.radvizRadius);
-      console.log('cos', sumOfaijMulCos, ' sin: ', sumOfaijMulSin);
-      // console.log('x: ', x, 'y: ', y);
+
       return { x, y };
     }
   },
