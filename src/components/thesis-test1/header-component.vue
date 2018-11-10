@@ -22,7 +22,7 @@ header
   > .title
     margin: 0 20px
   > input
-    width: 250px
+    width: 450px
     height: 30px
     border: none
     margin-left: 250px

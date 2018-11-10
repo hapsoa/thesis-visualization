@@ -10,6 +10,8 @@ import CircleTest from '../page/circle-test';
 import CircleTest2 from '../page/circle-test2';
 import ForceDirectedGraph from '../page/force-directed-graph';
 import ThesisTest1 from '../page/thesis-test1';
+import CurveTest from '../page/curve-test';
+import MakingRadviz from '../page/making-radviz';
 
 Vue.use(Router);
 
@@ -65,6 +67,16 @@ export default new Router({
       path: '/thesis-test1',
       name: ThesisTest1.name,
       component: ThesisTest1
+    },
+    {
+      path: '/curve-test',
+      name: CurveTest.name,
+      component: CurveTest
+    },
+    {
+      path: '/making-radviz',
+      name: MakingRadviz.name,
+      component: MakingRadviz
     }
   ]
 });

@@ -1,5 +1,6 @@
 <template lang="pug">
- #canvas
+  .hello
+    #canvas
 </template>
 
 <script>
@@ -84,15 +85,17 @@ export default {
         color: 'green',
         reference: 'zzz',
         parentSimilarity: 1,
-        siblingUnSimilarity: 0
+        siblingUnSimilarity: 0,
+        authors: ['harry', 'hermione', 'ron']
       },
       {
         name: 'bbb',
         year: 1999,
         color: 'green',
-        reference: 'zzz',
+        parent: [{x:1, y: 1}, 'asdf'],
         parentSimilarity: 1,
-        siblingUnSimilarity: 0.1
+        siblingUnSimilarity: 0.1,
+        authors: ['goloom', 'sam']
       },
       {
         name: 'ccc',
@@ -100,7 +103,8 @@ export default {
         color: 'green',
         reference: 'zzz',
         parentSimilarity: 0.5,
-        siblingUnSimilarity: -0.5
+        siblingUnSimilarity: -0.5,
+        authors: ['ann', 'cherchil', 'hitler']
       },
       {
         name: 'xxx',
@@ -108,7 +112,8 @@ export default {
         color: 'red',
         reference: 'hhh',
         parentSimilarity: 0.5,
-        siblingUnSimilarity: 0
+        siblingUnSimilarity: 0,
+        authors: ['mouse', 'cat', 'dog', 'horse']
       },
       {
         name: 'yyy',
@@ -226,6 +231,14 @@ export default {
       .style('stroke', 'gray')
       .style('stroke-width', 2);
 
+    // const lineData = [{ x: 30, y: 30 },
+    //   { x: 40, y: 30 },
+    //   { x: 50, y: 70 }];
+    // const line = d3.line()
+    //   .x(lineData => lineData.x)
+    //   .y(lineData => lineData.x)
+    //   .curve(d3.curveCatmullRom.alpha(0.5));
+
     // 노드 그리기
     svg.selectAll('circle.node')
       .data(nodesData)
@@ -240,7 +253,7 @@ export default {
     // 노드 클릭시 이벤트
     svg.selectAll('circle.node')
       // eslint-disable-next-line func-names
-      .on('click', function (d, i) {
+      .on('mouseover', function (d, i) {
         // alert(d.name);
         d3.select(this).style('fill', 'yellow');
         svg.append('rect')
