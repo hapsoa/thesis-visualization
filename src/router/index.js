@@ -12,6 +12,7 @@ import ForceDirectedGraph from '../page/force-directed-graph';
 import ThesisTest1 from '../page/thesis-test1';
 import CurveTest from '../page/curve-test';
 import MakingRadviz from '../page/making-radviz';
+import SandglassTest from '../page/sandglass-test';
 
 Vue.use(Router);
 
@@ -77,6 +78,11 @@ export default new Router({
       path: '/making-radviz',
       name: MakingRadviz.name,
       component: MakingRadviz
+    },
+    {
+      path: '/sandglass-test',
+      name: SandglassTest.name,
+      component: SandglassTest
     }
   ]
 });

@@ -47,6 +47,7 @@ module.exports = {
     }],
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    "linebreak-style": 0
+    "linebreak-style": 0,
+    "max-len": ["error", { "code": 300 }] // 불필요시 삭제한다
   }
 }
