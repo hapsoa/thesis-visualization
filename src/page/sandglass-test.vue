@@ -13,14 +13,15 @@
 
       circle.searched-node(:cx="searchedNode.x" :cy="searchedNode.y"
         r="10" fill="green")
+      text(:x="searchedNode.x + 14" :y="searchedNode.y + 4") searched thesis
 
       g.cluster(v-for="cluster in thesisData")
         line(v-for="(hullPoint, index) in cluster.hullPoints" v-if="index !== 0"
           :x1="cluster.hullPoints[index-1][0]" :y1="cluster.hullPoints[index-1][1]"
           :x2="hullPoint[0]" :y2="hullPoint[1]"
           style="stroke:rgb(255,0,0);stroke-width:2")
-        <!--circle.node(v-for="node in cluster.positions"-->
-          <!--:cx="node[0]" :cy="node[1]" r="3" fill="blue")-->
+        circle.node(v-for="node in cluster.positions"
+          :cx="node[0]" :cy="node[1]" r="3" fill="blue")
 
 
       <!--circle(v-for="hullPoint in hullPoints"-->
@@ -142,6 +143,44 @@ export default {
           this.createChildNodePosition(7, 22.4 / 16),
           this.createChildNodePosition(6, 22.4 / 16),
           this.createChildNodePosition(5, 23.4 / 16),
+        ]
+      },
+      cluster6: {
+        positions: [
+          this.createParentNodePosition(7, 9 / 16),
+          this.createParentNodePosition(8, 10 / 16),
+          this.createParentNodePosition(8, 9.5 / 16),
+          this.createParentNodePosition(9, 9.5 / 16),
+          this.createParentNodePosition(10, 9.7 / 16),
+          this.createParentNodePosition(10, 9.9 / 16),
+          this.createParentNodePosition(11, 9.9 / 16),
+          this.createParentNodePosition(11, 10.2 / 16),
+          this.createParentNodePosition(11, 10.4 / 16),
+          this.createParentNodePosition(11, 11 / 16),
+          this.createParentNodePosition(10, 10.5 / 16),
+        ]
+      },
+      cluster7: {
+        positions: [
+          this.createParentNodePosition(7, 3 / 16),
+          this.createParentNodePosition(8, 3.5 / 16),
+          this.createParentNodePosition(8, 4 / 16),
+          this.createParentNodePosition(9, 4 / 16),
+          this.createParentNodePosition(11, 4 / 16),
+        ]
+      },
+      cluster8: {
+        positions: [
+          this.createChildNodePosition(10, 28 / 16),
+          this.createChildNodePosition(11, 29 / 16),
+          this.createChildNodePosition(10, 28.5 / 16),
+          this.createChildNodePosition(10, 28.7 / 16),
+          this.createChildNodePosition(9, 28.3 / 16),
+          this.createChildNodePosition(9, 28.1 / 16),
+          this.createChildNodePosition(9, 27.9 / 16),
+          this.createChildNodePosition(8, 27.9 / 16),
+          this.createChildNodePosition(7, 27.9 / 16),
+          this.createChildNodePosition(8, 28.5 / 16),
         ]
       }
     };
